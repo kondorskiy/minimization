@@ -1,16 +1,15 @@
 
-/*====================================================================
+/*======================================================================================================================
 
-  TEST PROGRAM FOR CLASS FOR FUNCTION MINIMIZATION USING
-    CONJUGATED GRADIENT SEARCH (MINIMIZATION.CPP).
+  TEST PROGRAM FOR CLASS FOR FUNCTION MINIMIZATION USING CONJUGATED GRADIENT SEARCH (MINIMIZATION.CPP).
 
   ACKNOWLEDGEMENT(S): Alexey D. Kondorskiy,
     P.N.Lebedev Physical Institute of the Russian Academy of Science.
     E-mail: kondorskiy@lebedev.ru, kondorskiy@gmail.com.
 
-  Last modified: May 11, 2021.
+  Last modified: April 17, 2023.
 
-====================================================================*/
+======================================================================================================================*/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -19,13 +18,14 @@
 #include <math.h>
 #include <iostream>
 #include <vector>
+#include <sstream>
 
 #include "minimization.cpp"
 
 
-/*--------------------------------------------------------------------
+/*----------------------------------------------------------------------------------------------------------------------
   Function to be minimized
---------------------------------------------------------------------*/
+----------------------------------------------------------------------------------------------------------------------*/
 double testFunction(std::vector<double> &args)
 {
   double res = 0.0;
@@ -44,11 +44,9 @@ int main(void)
   std::vector<bool> var_flags;
   std::vector<double> steps;
 
-  /* Set initial guesses, flags to allow argument variation and
-     differentiation step. Since the sensitivity of a function
-     to variation of arguments differs from argument to argument,
-     differentiation steps should be adjusted individually
-     for each argument.  */
+  /* Set initial guesses, flags to allow argument variation and differentiation step. Since the sensitivity
+     of a function to variation of arguments differs from argument to argument, differentiation steps should
+     be adjusted individually for each argument. */
 
   // 1st argument.
   arg.push_back( 1.1);
@@ -87,7 +85,7 @@ int main(void)
   // Run minimization.
   double (*func)(std::vector<double> &);
   func = &testFunction;
-  Minimization my_min(log_file_name, true, 1.0e-8);
+  Minimization my_min(log_file_name, true, 1.0e-5);
   my_min.findMinimum(func, arg, var_flags, steps);
 
   std::cout << "Minimum found at : \n";
